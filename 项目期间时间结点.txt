@@ -1,0 +1,314 @@
+7.31任务        路由跑通 ：  项目和app创建，setting设置完成，                               提问与复习：  django的路由是什么？ ---- 》 （就是如何从发送一个请求到通过django反馈页面）
+		
+		数据库设计，url设计，                                                                     django url是如何加载的 ，url函数和include函数起到什么作用
+
+		user数据库同步完成                                                                        django的常见通用视图如何使用，举两个例子
+  
+		主页路由框架建立，填写url和views函数，分类模块数据库编写                                  你在项目中是如何使用分页的
+	
+		讲解内容 ： 网站图标，分页器使用                                                          你为什么选择django这样一个框架，他的特点是什么
+
+													  django是怎么链接数据库的，什么是ORM ，你对数据库引擎有了解么
+
+
+								
+
+8.1：           广告部分完成：模板分析，数据表创建，views编写					          django静态文件如何配置
+		链接部分完成：模板分析，数据表创建，views编写						  能简单说一下django的模板语法么，自己可以写一个过滤器或者标签么
+	
+		
+		讲解内容：图片的上传                                                                      
+
+
+
+
+
+
+
+
+
+8.2             文章部分完成：数据库建立，views编写                                                       在django中你是怎么上传图片的
+		外键链接类别数据库，建立标签数据库并连接						  什么是外键关联，你在django中怎么建立外键关联，建立起这样的联系以后又怎么取数据呢
+		
+		讲解内容：富文本编辑器的使用								  你能自己编写个中间件么
+			  图片上传处理								          在django中你使用过什么插件么，具体用途是什么
+
+
+
+
+8.4             登陆注册部分完成                                                                         你在django中是如何完成注册和登陆的
+		admin显示优化                                                                            你对网站的安全有一定的了解么
+		
+		讲解内容：cookie的获取									 网站的cookie在django中如何处理
+			  添加缓存									 用session和cookie有什么不同
+			  验证码介绍									 你用过什么换成，什么情况下你会选择缓存
+
+
+
+
+
+
+8.5   		测试与优化                                                                                写过测试代码么
+		评论部分逻辑设计 									  你通常都用什么方法做测试
+												          什么是WSGI  UWSGI uWSGI
+		讲解内容：测试和优化
+			  log模块的使用
+			  UWSGI部署
+			  requirements
+
+
+周末作业：项目报告与visio的使用                                                                            你要有良好的写项目文档的能力
+
+
+
+
+1.下载kindedoir 解压后放到 static/js
+
+
+2. 在模板中加入脚本，自己编写配置脚本
+
+3. 处理图片上传url，在url文件中添加对应的url
+
+4. 编写图片处理函数
+
+
+
+ max_age=None,   以秒为单位设置cookie超时
+ 
+expires=None,    以时间节点为单位设置cookie超市
+
+path='/',     设置生效的url
+
+domain=None,  设置生效的域名
+
+secure=None,  设置https 传输
+
+httponly=True ，无法被js获取
+
+
+
+
+session  和 cookie  
+
+cookie  ----》 客户端维护  不利于敏感信息存放
+
+session  ---》 应用服务器维护   session  依赖于 cookie
+
+
+  {
+       lakjflaskdfjsu9239048aj#$%^&:{
+	  
+          username:root
+          is_login: True
+       }
+
+
+
+
+
+
+
+
+
+  }
+
+
+
+
+logging  
+
+1. 输出在终端
+
+2. 输出在文件中
+
+CRITICAL > ERROR > WARNING > INFO > DEBUG
+
+logging.basucConfig 设置
+
+level  filename   filemode   format   datefmt   stream
+
+
+format 格式
+
+
+name   logger名字
+
+levelno
+
+levelname
+
+pathname  filename   module  funcName 
+
+lineno  created   当前时间
+
+asctime
+
+thread 
+threadName
+
+process
+processName
+
+1.
+pip freeze > requirments.txt
+
+2.
+pip install pipreqs
+pipreqs  path
+
+
+pip install -r  filename
+
+
+
+1.  将项目复制到服务器 使用requirement.txt进行环境配置安装 （或者直接解包虚拟环境）
+
+(1)
+pip freeze > requirments.txt
+
+(2)
+pip install pipreqs
+pipreqs  path
+
+
+pip install -r  filename
+
+
+2. 安装uWSGI服务器并配置，测试uWSGI服务器运行状态
+
+[uwsgi]
+#http = :9000
+
+socket = 127.0.0.1:8001
+
+chdir = /home/linux/blog_project
+
+wsgi-file = blog_project/wsgi.py
+
+processes = 4
+
+threads = 2
+
+stats = 127.0.0.1:8080
+
+vacuum = true
+
+
+3.安装nginx服务器并测试启动情况
+
+4. 将nginx 下uwsgi_params文件拷贝到项目目录下 （/etc/nginx）
+
+5. 编写nginx配置文件 并将配置文件软连接到 /etc/nginx/sites-enabled
+
+
+#mysite_nginx
+
+upstream django{
+  server 127.0.0.1:8001;
+}
+
+server {
+  listen        8000;
+  server_name blog_project.example.com;
+  charset          utf-8;
+  client_max_body_size 75M;
+
+  location /media {
+    alias /home/linux/blog_project/uploads;
+  }
+  location /static {
+    alias /home/linux/blog_project/static_file;
+  }
+  location / {
+    uwsgi_pass  django;
+    include /home/linux/blog_project/uwsgi_params;
+  }
+}
+
+
+6. 创建 STATIC_ROOT目录  使用  ./manage collectstatic 进行静态文件收集
+   DEBUG 设置为False
+
+7. 重启nginx  启动uWsgi  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

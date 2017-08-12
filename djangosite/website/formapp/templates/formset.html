@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Formset</title>
+  </head>
+  <body>
+    <h1>Form test 1</h1>
+    {{a}}
+    <form class="" action="" method="post">
+    {%csrf_token%}
+    {%for field in form%}
+    <div>
+      {{field.label}}:{{field}}
+      {{field.errors}}
+    </div>
+    {%endfor%}
+    <div class = "fieldWrapper">
+      <p><input type="submit" value = "留言"></p>
+    </div>
+    </form>
+  </body>
+</html>

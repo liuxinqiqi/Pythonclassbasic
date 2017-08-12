@@ -1,0 +1,48 @@
+create（）   直接创建数据记录
+
+
+save（） 模块对象来调用  用于同步数据库
+
+delete（） 删除记录
+
+update（） 更新记录
+
+
+all（）  ----》values  values_list  count  order_by     queryset
+   
+filter（） 过滤一个结果列表     model对象列表
+
+get（）  得到查找的记录        一个model对象
+
+exclude（）  不满足（）中条件的筛选出来    model对象列表
+
+
+views   response
+
+常用方法制定模板并渲染
+render 
+
+过去的方法，现在也支持，类似于render 但是不能直接使用模板全局变量
+render_ro_response
+
+
+直接返回字符串给前段
+HTTPResponse
+
+
+获取模板对象，渲染后给前端
+t = loader.get_template('bs.html')
+html = t.render({})
+return HttpResponse(html)
+
+
+返回给前段404错误
+Http404    
+
+
+跳转到指定的url
+HttpResponseRedirect
+
+
+功能类似于 HttpResponseRedirect
+redirect

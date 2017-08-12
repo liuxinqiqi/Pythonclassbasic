@@ -1,0 +1,69 @@
+
+win 下安装
+
+1. 下载对应版本安装包
+2. 安装安装文件
+3. 配置环境变量
+
+
+linux  安装  （linux自动集成python环境）
+
+1.下载安装包
+
+2. tar解压
+
+    使用configure编译环境
+    make 和 make install 安装
+
+3. 更换软链接
+
+
+vim 插件
+
+unzip 解压
+修改文件夹中install.sh权限
+sudo ./install.sh
+
+
+python 编码方式
+
+python2   ：ascii码    如果想加中文则要加  #coding=utf-8
+
+
+python3： unicode  utf-8   
+
+
+模块：一个 .py的python文件，我们看作是一个模块
+
+id  获取内存
+
+type  获取类型1.
+
+
+数字：整形  浮点型    科学计数法
+
+字符串：用单引号或者双引号
+
+
+
+变量的定义和使用
+
+print 的简单打印
+
+
+float   int   str 内建函数强转
+
+基本的逻辑运算和数学运算
+
+
+
+
+
+
+
+
+
+
+
+
+
